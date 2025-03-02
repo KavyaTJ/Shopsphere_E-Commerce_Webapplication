@@ -14,6 +14,14 @@ export const productType = defineType({
             validation:Rule=>Rule.required()
         }),
         defineField({
+            name:'slug',
+            title:'Slug',
+            type:'slug',
+            options:{
+                source:'name',
+                maxLength:96}
+        }),
+        defineField({
             name:'image',
             title:'Product Image',
             type:'image',
