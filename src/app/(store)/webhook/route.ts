@@ -11,7 +11,7 @@ import { backendClient } from "@/sanity/lib/backendClient";
 export async function POST(req:NextRequest){
 
     console.log("hit webhook=====================>.>.");
-    
+
     const body= await req.text()
     const headerList =await headers()
     const sig = headerList.get('stripe-signature')
