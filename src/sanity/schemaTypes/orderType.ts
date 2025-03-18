@@ -83,7 +83,7 @@ export const orderType = defineType({
             })]
         }),
         defineField({
-            name: 'Price',
+            name: 'price',
             title: 'Total Price',
             type: 'number',
             validation: Rule => Rule.required().min(0)
@@ -124,7 +124,7 @@ export const orderType = defineType({
             preview:{
                 select:{
                     name:'customerName',
-                    amount:'TotalPrice',
+                    amount:'price',
                     currency:'currency',
                     orderId:'orderNumber',
                     email:'email'

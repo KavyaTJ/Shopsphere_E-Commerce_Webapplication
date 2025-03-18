@@ -460,7 +460,7 @@
         },
         "optional": true
       },
-      "stripecusromerId": {
+      "stripeCustomerId": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -548,7 +548,7 @@
         },
         "optional": true
       },
-      "total": {
+      "price": {
         "type": "objectAttribute",
         "value": {
           "type": "number"
