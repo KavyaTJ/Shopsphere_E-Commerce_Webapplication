@@ -61,7 +61,7 @@ export const orderType = defineType({
                         name: 'quantity',
                         title: 'Quantity',
                         type: 'number',
-                        validation: Rule => Rule.required().min(0)
+                       
                     })
                 ],
                 preview: {

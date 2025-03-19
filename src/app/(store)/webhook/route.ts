@@ -61,6 +61,9 @@ async function createOrderInSanity(session:Stripe.Checkout.Session){
         expand:['data.price.product']
     })
 
+    console.log("Session total_details:", total_details);
+
+
 const sanityProducts= lineItemsWithProduct.data.map((item) => ({
     _key: crypto.randomUUID(),
     product: {
