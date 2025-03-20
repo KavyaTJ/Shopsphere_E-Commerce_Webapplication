@@ -83,11 +83,11 @@ export const orderType = defineType({
             })]
         }),
         defineField({
-            name: 'price',
-            title: 'Total Price',
-            type: 'number',
-            validation: Rule => Rule.required().min(0)
-        }),
+              name: 'totalPrice',
+              title: 'Total Price',
+              type: 'number',
+              validation: Rule => Rule.required().min(0)
+            }),
         defineField({
             name: 'currency',
             title: 'Currency',
@@ -124,19 +124,19 @@ export const orderType = defineType({
             preview:{
                 select:{
                     name:'customerName',
-                    amount:'price',
+                    price: 'product.price',
                     currency:'currency',
                     orderId:'orderNumber',
                     email:'email'
                
         },
         prepare(select) {
-            const orderIdSnippet = select.orderId && select.orderId.length > 10
+            const orderIdSnippet = select.orderId && select.orderId.length > 10 
                 ? `${select.orderId.slice(0, 5)}...${select.orderId.slice(-5)}`
                 : select.orderId || 'N/A';
             return {
                 title: `${select.name} - ${orderIdSnippet}`,
-                subtitle: `${select.amount}${select.currency}, ${select.email}`,
+                subtitle: `${select.currency}${select.price}, ${select.email}`,
                 media: BasketIcon
             };
         }

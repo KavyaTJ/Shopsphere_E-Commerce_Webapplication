@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/lib/formatCurrency"
+import { imageUrl } from "@/lib/imageUrl";
 import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -53,14 +54,14 @@ async function Orders() {
                 </div>
                 <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                   <div className="flex items-center">
-                    <span className="text-sm mr-2">Status:</span>
+                    <span className="text-sm mr-2 pl-5">Status:</span>
                     <span
                       className={`px-3 py-1 rounded-full text-sm ${order.status === "paid" ? "text-green-600" : "text-gray-800"}`}
                       >
                       {order.status}
                     </span>
                   </div>
-                  <div className="sm:text-right">
+                  <div className="sm:text-right pr-5 mt-3">
                     <p className="text-sm text-gray-600 mb-1 font-bold">
                       Total Amount
                     </p>
@@ -71,17 +72,55 @@ async function Orders() {
                   </div>
                 </div>
                 {order.amountDiscount ? (
-                  <div className="p-4 sm:p-6 border-t border-gray-200">
-                    <div className="flex justify-between items-center">
-                      <p className="text-sm text-gray-600 font-bold">
-                        Discount
-                      </p>
-                      <p className="font-bold text-lg">
-                        -{formatCurrency(order.amountDiscount, order.currency)}
-                      </p>
-                    </div>
+                 <div className="mt-4 p-3 sm:p-4 bg-red-50 rounded-lg">
+                 <p className="text-red-600  mb-1 text-sm sm:text-base font-bold">Discount Applied:{"  "}
+                  {formatCurrency(order.amountDiscount,order.currency)}
+                 </p>
+                 <p className="text-sm text-gray-800 font-bold">
+                  Original Subtotal:{'  '}
+                  {formatCurrency((order.totalPrice ?? 0)+ order.amountDiscount,order.currency)}
+                 </p>
                   </div>
                 ) : null}
+<div className="px-4 py-3 sm:px-6 sm:py-4">
+  <p className="text-sm font-semibold text-gray-600 mb-3 sm:mb-4">
+    Order Items
+  </p>
+  <div className="space-y-3 sm:space-y-4">
+    {order.products?.map((product) => (
+      <div
+        key={product.product?._id}
+        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-2 border-b last:border-b-0"
+      >
+        <div className="flex items-center gap-3 sm:gap-4">
+          {product.product?.image && (
+          <div className="relative h-24 w-20 sm:h-28 sm:w-25 flex-shrink-0 rounded-md ">
+
+              <img
+                src={imageUrl(product.product.image).url()}
+                alt={product.product?.name ?? ""}
+                className="object-cover"
+              />
+            </div>
+          )}
+          <div>
+            <p className="font-semibold text-sm sm:text-base">
+              {product.product?.name}
+            </p>
+            <p className="text-sm text-gray-600">
+              Quantity: {product.quantity ?? "N/A"}
+            </p>
+          </div>
+        </div>
+        <p className="font-medium text-right">
+          {product.product?.price && product.quantity ? formatCurrency(product.product.price * product.quantity,order.currency):'N/A'}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
+
+     
               </div>
             ))}
           </div>
