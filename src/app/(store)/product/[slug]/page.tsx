@@ -5,6 +5,10 @@ import Image from 'next/image'
 import { PortableText } from 'next-sanity';
 import AddToBasketButton from '@/components/AddToBasketButton';
 
+
+export const dynamic ="force-static"
+export const revalidate =60
+
 export default async function ProductPage({ params }: { params: { slug: string } }) {
     const { slug } = params; // Direct destructuring
     const product = await getProductBySlug(slug);
