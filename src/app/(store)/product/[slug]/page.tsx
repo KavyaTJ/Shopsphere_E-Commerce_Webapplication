@@ -6,14 +6,18 @@ import { PortableText } from 'next-sanity';
 import AddToBasketButton from '@/components/AddToBasketButton';
 
 
+
 export const dynamic ="force-static"
 export const revalidate =60
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-    const { slug } = params; // Direct destructuring
+export default async function ProductPage({
+    params,
+  }: { params:Promise<{
+    slug:string;
+  }>;
+}){
+     const {slug}=await params
     const product = await getProductBySlug(slug);
-    console.log('Slug from params:', slug);
-console.log('Sanity response:', product);
     if(!product){
         return <div>Product Not Found</div>
     }

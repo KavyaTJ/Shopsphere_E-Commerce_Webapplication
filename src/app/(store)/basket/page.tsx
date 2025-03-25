@@ -51,7 +51,7 @@ try{
         customerEmail:user?.emailAddresses[0].emailAddress ?? "UnKnown",
         clerkUserId:user!.id
     }
-    const checkoutUrl:any=await createCheckoutSession(groupedItems,metadata)
+    const checkoutUrl=await createCheckoutSession(groupedItems,metadata)
     if(checkoutUrl){
         window.location.href=checkoutUrl
     }

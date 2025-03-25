@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import SearchPage from "./Search/page";
+
 import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
 import ProductsView from "@/components/ProductsView";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
