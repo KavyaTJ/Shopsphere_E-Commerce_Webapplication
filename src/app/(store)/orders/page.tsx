@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
 
+
 async function Orders() {
   const { userId } = await auth();
   if (!userId) {
@@ -25,7 +26,7 @@ async function Orders() {
           </div>
         ) : (
           <div className="space-y-6 sm:space-y-8">
-            {orders.map((order:any) => (
+            {orders.map((order) => (
               <div
                 key={order.orderNumber}
                 className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
@@ -87,7 +88,8 @@ async function Orders() {
     Order Items
   </p>
   <div className="space-y-3 sm:space-y-4">
-    {order.products?.map((product:any) => (
+    {order.products?.map((product) => (
+      
       <div
         key={product.product?._id}
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-2 border-b last:border-b-0"

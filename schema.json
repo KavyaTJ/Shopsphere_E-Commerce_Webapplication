@@ -548,7 +548,7 @@
         },
         "optional": true
       },
-      "price": {
+      "totalPrice": {
         "type": "objectAttribute",
         "value": {
           "type": "number"
